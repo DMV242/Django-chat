@@ -49,8 +49,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
             image_data = text_data_json["image"].split(";")[1].split(",")[1]
             image_name = text_data_json["name"]
-            base_dir = settings.BASE_DIR
-
             image_binary = base64.b64decode(image_data)
 
             saved_message = await database_sync_to_async(self.save_message)(
