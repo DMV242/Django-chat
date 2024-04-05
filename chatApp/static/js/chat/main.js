@@ -3,7 +3,9 @@
 const roomName = document.querySelector(".room_name").textContent;
 const username = document.querySelector(".username").textContent;
 const messageContainer = document.querySelector("#messages");
-
+const messageInputDom = document.querySelector('#message');
+const ImageInputDom = document.querySelector('#photo');
+const photoForm = document.querySelector('#send-photo-form');
 
 
 
@@ -20,39 +22,58 @@ const chatSocket = new WebSocket(
 chatSocket.onmessage = function (e) {
 
     const data = JSON.parse(e.data);
+    let html;
     if (username === data.user) {
-        messageContainer.insertAdjacentHTML("beforeend", `
-        <div class="user-message">
-          <div class="chat">
-        <div class="chat_info">
-            <div class="contact_name">Vous </div>
-            <div class="contact_msg">${data.message}</div>
+
+        if (data.type !== "chat.image") {
+            html = `
+            <div class="user-message">
+              <div class="chat">
+            <div class="chat_info">
+                <div class="contact_name">Vous </div>
+                <div class="contact_msg">${data.message}</div>
+            </div>
+            <div class="chat_status">
+                <div class="chat_date">${data.time}</div>
+            </div>
         </div>
-        <div class="chat_status">
-            <div class="chat_date">${data.time}</div>
         </div>
-    </div>
-    </div>
-    `)
+        `
+        } else {
+            html = ` <div class="user-message"><img src="${data.image}" /> </div>`
+        }
+
+
+
+        messageContainer.insertAdjacentHTML("beforeend", html)
         messageContainer.scrollBy({
             behavior: "smooth",
             top: 9999
 
         });
     } else {
-        messageContainer.insertAdjacentHTML("beforeend", `
-        <div class="other-message">
-          <div class="chat">
-        <div class="chat_info">
-            <div class="contact_name">${data.user} </div>
-            <div class="contact_msg">${data.message}</div>
+        if (data.type !== "chat.image") {
+            html = `
+            <div class="other-message">
+              <div class="chat">
+            <div class="chat_info">
+                <div class="contact_name">Vous </div>
+                <div class="contact_msg">${data.message}</div>
+            </div>
+            <div class="chat_status">
+                <div class="chat_date">${data.time}</div>
+            </div>
         </div>
-        <div class="chat_status">
-            <div class="chat_date">${data.time}</div>
         </div>
-    </div>
-    </div>
-    `)
+        `
+        } else {
+            html = `
+            <div class="other-message">
+            <img src="${data.image}" />
+            </div>`
+        }
+
+        messageContainer.insertAdjacentHTML("beforeend", html)
     }
     messageContainer.scrollBy({
         behavior: "smooth",
@@ -74,14 +95,48 @@ document.querySelector('#message').onkeyup = function (e) {
 };
 
 document.querySelector('#chat-submit').onclick = function (e) {
-    const messageInputDom = document.querySelector('#message');
+
+    const file = ImageInputDom.files[0];
     const message = messageInputDom.value;
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const imageData = event.target.result;
+        console.log(file.name)
+        chatSocket.send(JSON.stringify({ 'image': imageData, 'name': file.name }));
+
+    };
+
+    if (!message && !file) {
+        alert("Vous devez saisir un message ou envoyer une image");
+        resetfields();
+        return;
+    }
+    if (file && !message) {
+        reader.readAsDataURL(file);
+        resetfields();
+        return;
+    }
+    if (file && message) {
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+        reader.readAsDataURL(file);
+        resetfields();
+        return;
+    }
+
     chatSocket.send(JSON.stringify({
         'message': message
     }));
-    messageInputDom.value = '';
+    resetfields();
+
+
 };
 
+function resetfields() {
+    messageInputDom.value = '';
+    photoForm.reset();
+}
 
-// TOAST
+
 

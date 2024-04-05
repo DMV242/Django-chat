@@ -376,3 +376,8 @@ body .btn-google{
         color: #fff;
     }
 
+#messages img{
+  height: 200px;
+  height: 250px;
+  margin-bottom: 10px;
+}

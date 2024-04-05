@@ -24,10 +24,11 @@ class Room(models.Model):
 
 
 class Message(models.Model):
-    content = models.CharField(max_length=500)
+    content = models.CharField(max_length=500, blank=True, null=True)
     author = models.ForeignKey(get_user_model(), models.CASCADE)
     room = models.ForeignKey(Room, models.CASCADE)
     sended_date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(verbose_name=("image"), upload_to="images/", blank=True)
 
     def __str__(self) -> str:
         return "Message de " + self.author.get_username() + f"-{self.sended_date}"

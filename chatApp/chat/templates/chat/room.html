@@ -16,7 +16,11 @@
 
             {% for message in messages %}
             {% if message.author == request.user %}
+
             <div class="user-message">
+                {% if message.content is None %}
+                <img src="{{ message.image.url }}" alt="" />
+                {% else %}
                 <div class="chat">
                     <div class="chat_info">
                         <div class="contact_name">Vous </div>
@@ -26,23 +30,34 @@
                         <div class="chat_date">{{ message.sended_date }}</div>
                     </div>
                 </div>
+                {% endif %}
+
             </div>
             {% else %}
             <div class="other-message">
+
+                {% if message.content is None %}
+                <img src="{{ message.image.url }}" alt="" />
+                {% else %}
                 <div class="chat">
                     <div class="chat_info">
-                        <div class="contact_name">{{ message.author }}</div>
+                        <div class="contact_name">Vous </div>
                         <div class="contact_msg">{{ message.content }}</div>
                     </div>
                     <div class="chat_status">
                         <div class="chat_date">{{ message.sended_date }}</div>
                     </div>
                 </div>
+                {% endif %}
             </div>
             {% endif %}
             {% endfor %}
         </div>
         <input type="text" name="message" id="message">
+        <form id="send-photo-form">
+            <input type="file" name="photo" accept="image/png, image/jpeg" id="photo">
+        </form>
+
         <input type="submit" value="Envoyer" id="chat-submit" class="btn send-message">
     </div>
 </body>
