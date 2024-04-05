@@ -1,0 +1,16 @@
+<header>
+    <nav class="nav">
+        <h1> DavChatApp,Bienvenue <span class="username">{{ request.user.username }}</span></h1>
+        <div class="menu_options">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-disconnect" type="submit">Se déconnecter </button>
+            </form>
+            <div>
+                <a href="{% url 'home' %}" class="bouton">
+                    <button type="button" class="btn btn-disconnect">Changer de salon</button>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

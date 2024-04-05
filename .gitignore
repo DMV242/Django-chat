@@ -1,0 +1,5 @@
+env
+chatApp/*.sqlite3
+chatApp/db.sqlite3
+
+__pycache__

@@ -1,0 +1,53 @@
+<!-- chat.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+{% endblock additional_css %}
+{% block content %}
+
+<body class="app">
+    {% include "navbar.html" %}
+
+    <div class="message-container">
+        <h2>Salon : <span class="room_name">{{ room }}</span></h2>
+
+        <div id="messages">
+
+            {% for message in messages %}
+            {% if message.author == request.user %}
+            <div class="user-message">
+                <div class="chat">
+                    <div class="chat_info">
+                        <div class="contact_name">Vous </div>
+                        <div class="contact_msg">{{ message.content }}</div>
+                    </div>
+                    <div class="chat_status">
+                        <div class="chat_date">{{ message.sended_date }}</div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="other-message">
+                <div class="chat">
+                    <div class="chat_info">
+                        <div class="contact_name">{{ message.author }}</div>
+                        <div class="contact_msg">{{ message.content }}</div>
+                    </div>
+                    <div class="chat_status">
+                        <div class="chat_date">{{ message.sended_date }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <input type="text" name="message" id="message">
+        <input type="submit" value="Envoyer" id="chat-submit" class="btn send-message">
+    </div>
+</body>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/chat/main.js' %}"></script>
+{% endblock script %}

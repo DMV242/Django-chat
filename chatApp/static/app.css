@@ -1,0 +1,378 @@
+/* CONFIG */
+
+:root{
+    --bg-primary:#0E79B2;
+    --text-btn-color:#FBFEF9;
+    --text-color: #191923;
+    --danger-alert:#b81f1f;
+}
+
+
+.center-text{
+    text-align: center;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+a{
+    text-decoration: none;
+}
+html{
+    color: var(--text-color);
+
+
+}
+body.login {
+position: relative;
+
+}
+
+
+/* LOGIN FORM */
+
+body.login ,body.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+
+}
+
+
+/* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+
+
+form.login li,form.signup li, body.app  li {
+    list-style: none;
+    background-color:var(--danger-alert);
+    color: var(--text-btn-color);
+    padding: 12px 8px;
+    border-radius: 12px;
+}
+
+li.errorlist{
+  display: none;
+}
+
+li.success{
+  background-color: greenyellow;
+  display: none;
+}
+
+form.login {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+
+form input#id_username,
+input#id_password,
+input#id_name,
+input#message,
+ input#id_email,
+ input#id_password1,
+ input#id_password2
+ {
+    width: 100%;
+    padding: 12px 8px;
+    border-radius: 12px ;
+    border: #0E79B2 1px solid;
+
+}
+form input#id_username:focus,
+input#id_password:focus,
+input#id_name:focus,
+input#message:focus,
+ input#id_email:focus,
+ input#id_password1:focus,
+ input#id_password2:focus{
+  outline: 2px solid rgba(28,110,164,0.52);
+  outline-offset: 1px;
+
+ }
+
+label[for="id_username"],label[for="id_password"], label[for="id_name"]{
+    display: block;
+}
+
+.btn{
+    padding: 12px 8px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 24px;
+    background-color: var(--bg-primary);
+    width: 100%;
+    text-transform: uppercase;
+    color:var(--text-btn-color) ;
+    cursor: pointer;
+}
+
+/* HOME PAGE */
+
+.app h1{
+    color: var(--text-btn-color);
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0E79B2;
+    padding: 20px;
+}
+
+nav .menu_options{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-disconnect{
+    background-color: var(--text-btn-color);
+    color: var(--bg-primary);
+}
+
+.room_create_container{
+    padding: 45px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.rooms{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+/* ROOM CARD */
+.ag-courses_box {
+
+
+
+    padding: 50px 0;
+  }
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(33.33333% - 30px);
+    flex-basis: calc(33.33333% - 30px);
+
+    margin: 0 15px 30px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+  }
+  .ag-courses-item_link {
+    display: block;
+    padding: 30px 20px;
+    background-color: #121212;
+
+    overflow: hidden;
+
+    position: relative;
+  }
+  .ag-courses-item_link:hover,
+  .ag-courses-item_link:hover .ag-courses-item_date {
+    text-decoration: none;
+    color: #FFF;
+  }
+  .ag-courses-item_link:hover .ag-courses-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+  }
+  .ag-courses-item_title {
+    min-height: 87px;
+    margin: 0 0 25px;
+
+    overflow: hidden;
+
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFF;
+
+    z-index: 2;
+    position: relative;
+  }
+  .ag-courses-item_date-box {
+    font-size: 18px;
+    color: #FFF;
+
+    z-index: 2;
+    position: relative;
+  }
+  .ag-courses-item_date {
+    font-weight: bold;
+    color: #f9b234;
+
+    -webkit-transition: color .5s ease;
+    -o-transition: color .5s ease;
+    transition: color .5s ease
+  }
+  .ag-courses-item_bg {
+    height: 128px;
+    width: 128px;
+    background-color: var(--bg-primary);
+
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+
+  /* CHAT APP  */
+  .message-container{
+    padding: 40px;
+    background-color: var(--text-btn-color);
+
+
+  }
+  #messages{
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  #messages .user-message{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+;
+
+    .chat{
+        width: 350px;
+        margin-bottom: 10px;
+
+    }
+
+
+  }
+  #messages .other-message{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+
+
+    .chat{
+        width: 350px;
+        background-color: #b81f1f;
+        margin-bottom: 10px;
+
+    }
+
+  }
+  /* CHAT INPUT AND BUTTON SEND */
+
+  input#message{
+    margin-top: 50px;
+}
+
+  .send-message{
+    width: 40%;
+  }
+
+  /* CHAT COMPONENT */
+
+  #messages{
+    padding: 40px;
+
+  }
+  .chat {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+    border-bottom: 1px solid #d3d3d35e;
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.contact_name {font-weight: 500;
+
+  color: var(--text-btn-color);
+     font-size: 11px;
+    margin-bottom: 2px;}
+
+.contact_msg {
+
+     font-size: 15px;
+    color: var(--text-btn-color);;
+
+}
+.chat_info {width: 50%;}
+
+.chat_date {
+    font-size: 12px;
+    color: var(--text-btn-color);;
+  margin-bottom: 2px;
+
+}
+
+/* SIGNUP PAGE */
+
+#id_username_helptext{
+  display: none;
+}
+#id_password1_helptext ul{
+ text-align: center;
+ margin-bottom: 8px;
+ font-size: 12px;
+
+}
+
+body .btn-google{
+  background-color: var(--text-btn-color) ;
+  color: var(--bg-primary);
+  border: 1px black solid;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* PAGINATION */
+
+
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .pagination .step-links a {
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .pagination .step-links a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination .step-links .current {
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        border: 1px solid #007bff;
+        border-radius: 3px;
+        color: #fff;
+    }
+

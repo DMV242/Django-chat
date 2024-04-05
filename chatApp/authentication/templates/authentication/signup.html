@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+
+<body class="signup">
+    <section>
+
+        <h1 class="text-48">Inscrivez-vous sur DavChat</h1>
+        <form method="post" class="signup">
+            {% if errors %}
+            <li class="errorlist">
+                {{ errors }}
+            </li>
+            {% endif %}
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button type="submit" class="btn btn-login">Créer un compte </button>
+        </form>
+        <p>Vous avez déjà un compte ? :<a href="{% url 'login' %}">Connectez vous </a></p>
+        <br />
+        {% include "google_login.html" %}
+    </section>
+
+</body>
+
+
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/chat/signup.js' %}"></script>
+{% endblock script %}

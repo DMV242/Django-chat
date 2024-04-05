@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+<body class="app">
+    {% include "navbar.html" %}
+    <main>
+        <div class="room_create_container">
+            <div class="room_form_container">
+                {% if errors %}
+                <li class="errors">
+                    {{ errors }}
+                </li>
+                {% endif %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <ul class="messages">
+
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+
+                    </ul>
+                    {% endfor %}
+                </ul>
+
+                <h2>Créer un sallon discussion </h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <button class="btn"> créer un salon </button>
+                </form>
+            </div>
+        </div>
+        {% if rooms|length == 0 %}
+        <div class="rooms" style="justify-content: center;">
+            <p style="display: block;">Aucun salon disponible pour le moment.</p>
+        </div>
+        {% else %}
+        <div class="rooms">
+            {% for room in rooms %}
+            <div class="ag-courses_item room" id="{{ room.name }}">
+                <a href="{% url 'room' room.name %}" class="ag-courses-item_link">
+
+                    <div class="ag-courses-item_bg"></div>
+                    <div class="ag-courses-item_title">
+                        {{room.name}}
+                    </div>
+                    <div class="ag-courses-item_date-box">
+                        <span class="ag-courses-item_date">
+
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if rooms.has_previous %}
+                <a href="?page=1">&laquo; Première</a>
+                <a href="?page={{ rooms.previous_page_number }}">précedente</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ rooms.number }} of {{ rooms.paginator.num_pages }}.
+
+                </span>
+
+                {% if rooms.has_next %}
+                <a href="?page={{ rooms.next_page_number }}">suivante</a>
+                <a href="?page={{ rooms.paginator.num_pages }}">dernière &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+
+
+
+    </main>
+</body>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/chat/signup.js' %}"></script>
+{% endblock script %}
