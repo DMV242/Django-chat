@@ -1,10 +1,15 @@
 <!-- chat.html -->
 {% extends "base.html" %}
 {% load static %}
-{% block additional_css %}
-<link rel="stylesheet" href="{% static 'css/chat.css' %}">
-{% endblock additional_css %}
+
+{% block title %}
+📨 Message
+{% endblock title %}
+
+
 {% block content %}
+
+
 
 <body class="app">
     {% include "navbar.html" %}
@@ -54,11 +59,16 @@
             {% endfor %}
         </div>
         <input type="text" name="message" id="message">
-        <form id="send-photo-form">
-            <input type="file" name="photo" accept="image/png, image/jpeg" id="photo">
-        </form>
+        <div class="send-btn-container">
+            <form id="send-photo-form">
+                {# <input type="file" name="photo" accept="image/png, image/jpeg" id="photo"> #}
+                <label for="images" class="drop-container" id="dropcontainer">
+                    <input type="file" id="photo" accept="image/*" required>
+                </label>
+            </form>
 
-        <input type="submit" value="Envoyer" id="chat-submit" class="btn send-message">
+            <input type="submit" value="Envoyer" id="chat-submit" class="btn send-message">
+        </div>
     </div>
 </body>
 {% endblock content %}

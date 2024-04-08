@@ -26,6 +26,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json.get("message")
+
         user = self.scope.get("user")
         room = self.scope["url_route"]["kwargs"]["room_name"]
         current_room = await database_sync_to_async(self.get_room)(room)

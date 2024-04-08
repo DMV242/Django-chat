@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block title %}
+🔓 Page connexion
+{% endblock title %}
 {% block content %}
 
 
 
 <body class="login">
 
-  <section>
+  <section class="box">
     <h1 class="text-48">Connectez-vous sur DavChat</h1>
     <form method="post" class="login">
       {% csrf_token %}

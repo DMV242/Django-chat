@@ -1,5 +1,6 @@
 env
 chatApp/*.sqlite3
 chatApp/db.sqlite3
-
+.env
 __pycache__
+mediafiles

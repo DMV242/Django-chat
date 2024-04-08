@@ -5,6 +5,30 @@
     --text-btn-color:#FBFEF9;
     --text-color: #191923;
     --danger-alert:#b81f1f;
+    --d: 2500ms;
+    --angle: 90deg;
+    --gradX: 100%;
+    --gradY: 50%;
+    --c1: rgba(168, 239, 255, 1);
+    --c2: rgba(168, 239, 255, 0.1);
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
 }
 
 
@@ -44,7 +68,17 @@ body.login ,body.signup {
 }
 
 
-/* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+body.login section,body.signup section{
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  padding: 50px;
+  border-radius: 12px;
+
+
+
+}
+
+
+
 
 
 form.login li,form.signup li, body.app  li {
@@ -64,10 +98,11 @@ li.success{
   display: none;
 }
 
-form.login {
+form.login,form.signup {
     display: flex;
     flex-direction: column;
     gap: 5px;
+
 }
 
 
@@ -242,7 +277,7 @@ nav .menu_options{
 
   }
   #messages{
-    height: 500px;
+    height: 400px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
@@ -283,7 +318,10 @@ nav .menu_options{
 }
 
   .send-message{
-    width: 40%;
+    width:auto;
+    margin: 0;
+    height: 50px;
+
   }
 
   /* CHAT COMPONENT */
@@ -292,6 +330,10 @@ nav .menu_options{
     padding: 40px;
 
   }
+
+
+
+
   .chat {
     display: flex;
     justify-content: space-between;
@@ -300,6 +342,7 @@ nav .menu_options{
     background-color: var(--bg-primary);
     padding: 10px;
     border-radius: 12px;
+    width: 400px;
 }
 
 .contact_name {font-weight: 500;
@@ -380,4 +423,83 @@ body .btn-google{
   height: 200px;
   height: 250px;
   margin-bottom: 10px;
+}
+
+/* SEND IMAGE BTN */
+
+input[type=file] {
+  width: 350px;
+  max-width: 100%;
+  height: 50px;
+border-radius: 12px;
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid var(--bg-primary);
+}
+
+input[type=file]:focus {
+  outline: 2px dashed #222245;
+  outline-offset: 2px;
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 8px;
+  border: none;
+  background-color: var(--bg-primary);
+  padding: 8px 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* BOUTONS D'ENVOIS CONTAINER */
+
+.send-btn-container{
+display: flex;
+align-items: center;
+margin-top: 10px;
+gap: 10px;
+}
+
+/* FORM ANIMATION */
+
+.box {
+
+	border: 0.35rem solid;
+
+	border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+	animation: borderRotate var(--d) linear infinite forwards;
+}
+
+.box:nth-child(2) {
+	border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+	animation: borderRadial var(--d) linear infinite forwards;
+}
+
+@keyframes borderRotate {
+	100% {
+		--angle: 420deg;
+	}
+}
+
+@keyframes borderRadial {
+	20% {
+		--gradX: 100%;
+		--gradY: 50%;
+	}
+	40% {
+		--gradX: 100%;
+		--gradY: 100%;
+	}
+	60% {
+		--gradX: 50%;
+		--gradY: 100%;
+	}
+	80% {
+		--gradX: 0%;
+		--gradY: 50%;
+	}
+	100% {
+		--gradX: 50%;
+		--gradY: 0%;
+	}
 }
