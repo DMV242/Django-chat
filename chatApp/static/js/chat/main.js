@@ -21,6 +21,7 @@ const chatSocket = new WebSocket(
 
 chatSocket.onmessage = function (e) {
 
+
     const data = JSON.parse(e.data);
     let html;
     if (username === data.user) {
@@ -52,12 +53,24 @@ chatSocket.onmessage = function (e) {
 
         });
     } else {
+        Toastify({
+            text: "Vous avez 1 nouveau message ",
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            // Prevents dismissing of toast on hover
+            style: {
+                background: "green",
+                color: "white"
+            },
+            onClick: function () { } // Callback after click
+        }).showToast();
         if (data.type !== "chat.image") {
             html = `
             <div class="other-message">
               <div class="chat">
             <div class="chat_info">
-                <div class="contact_name">Vous </div>
+                <div class="contact_name">${data.user} </div>
                 <div class="contact_msg">${data.message}</div>
             </div>
             <div class="chat_status">
