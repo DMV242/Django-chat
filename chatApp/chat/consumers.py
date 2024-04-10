@@ -1,7 +1,5 @@
 import base64
 import json
-import os
-from django.conf import settings
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from chat.models import Message, Room
@@ -19,7 +17,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        # Leave room group
+
         await self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
     # Receive message from WebSocket

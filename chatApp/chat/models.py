@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
+from uuid import uuid4
+
 
 # Create your models here.
 
@@ -18,9 +20,16 @@ class Room(models.Model):
         ],
         error_messages={"unique": "Une room avec  ce nom existe déjà."},
     )
+    slug = models.SlugField(default="")
+    creator = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return "Room " + self.name
+
+    def save(self, *args, **kwargs):
+
+        self.slug = self.name + "-" + str(uuid4())[:20]
+        return super().save(*args, **kwargs)
 
 
 class Message(models.Model):

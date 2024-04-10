@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+❌ Supprimer le salon - {{ object.name }}
+{% endblock title %}
+
+{% block content %}
+
+<body class="app delete">
+
+    {% include "navbar.html" %}
+
+    <section class="delete-form-container">
+        <form method="post" class="delete-room-form">
+            {% csrf_token %}
+            <h2>Voulez-vous vraiment supprimer le salon {{ object.name }}?</h2>
+            {{ form }}
+            <input type="submit" value="Oui" class="btn">
+            <a href="{% url 'home' %}" class="btn">Non</a>
+        </form>
+    </section>
+
+
+
+</body>
+
+{% endblock content %}

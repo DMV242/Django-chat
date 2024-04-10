@@ -45,17 +45,15 @@
             {% for room in rooms %}
             <div class="ag-courses_item room" id="{{ room.name }}">
                 <a href="{% url 'room' room.name %}" class="ag-courses-item_link">
-
                     <div class="ag-courses-item_bg"></div>
                     <div class="ag-courses-item_title">
                         {{room.name}}
                     </div>
-                    <div class="ag-courses-item_date-box">
-                        <span class="ag-courses-item_date">
-
-                        </span>
-                    </div>
                 </a>
+                {% if request.user == room.creator %}
+                <a href="{% url 'delete_room' room.slug %}" class="btn delete-room">Supprimer</a>
+                {% endif %}
+
             </div>
             {% endfor %}
         </div>

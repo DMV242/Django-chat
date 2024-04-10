@@ -154,6 +154,7 @@ CHANNEL_LAYERS = {
     },
 }
 
+
 LOGIN_URL = "/"
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
